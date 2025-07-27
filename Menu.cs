@@ -21,7 +21,7 @@ namespace MathGame
 
             while (true)
             {
-                Console.WriteLine($"Enter the number of menu section\n");
+                Console.WriteLine($"Enter the number of menu section");
                 var input = Console.ReadLine();
                 int result;
                 bool success = int.TryParse(input, out result);

@@ -7,17 +7,18 @@ namespace MathGame
 {
     public class Logic
     {
-        static Random random = new Random();
-
+        private static int a;
+        private static int b;
+        private static int x;
         public static void Addition()
+
         {
             Console.WriteLine($"Game started! Type 'Exit', if you want to end the game");
 
             while (true)
             {
-                int a = random.Next(100);
-                int b = random.Next(100);
-                int x = a + b;
+                Numbers(out a, out b);
+                x = a + b;
 
                 Console.WriteLine($"{a} + {b} = ");
 
@@ -53,9 +54,8 @@ namespace MathGame
 
             while (true)
             {
-                int a = random.Next(100);
-                int b = random.Next(100);
-                int x = a - b;
+                Numbers(out a, out b);
+                x = a - b;
 
                 Console.WriteLine($"{a} - {b} = ");
 
@@ -91,9 +91,8 @@ namespace MathGame
 
             while (true)
             {
-                int a = random.Next(100);
-                int b = random.Next(100);
-                int x = a * b;
+                Numbers(out a, out b);
+                x = a * b;
 
                 Console.WriteLine($"{a} * {b} = ");
 
@@ -126,8 +125,6 @@ namespace MathGame
         public static void Division()
         {
             Console.WriteLine($"Game started! Type 'Exit', if you want to end the game");
-
-
         }
 
 
@@ -137,5 +134,12 @@ namespace MathGame
 
         }
         */
+
+        public static void Numbers(out int number1, out int number2)
+        {
+            Random random = new Random();
+            number1 = random.Next(1, 100);
+            number2 = random.Next(1, 100);
+        }
     }
 }
