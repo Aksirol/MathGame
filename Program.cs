@@ -1,7 +1,4 @@
 ﻿Random random = new Random();
-int a = 0;
-int b = 0;
-int x = 0;
 string[] menuOptions = { "Addition", "Subtraction", "Multiplication", "Division", "History", "Rules", "Exit" };
 int c = 0;
 
@@ -34,6 +31,18 @@ while (true)
         case 1:
             Addition();
             break;
+
+        case 2:
+            Subtraction();
+            break;
+
+        case 3:
+            Multiplication();
+            break;
+
+        case 4:
+           // Division();
+            break;
     }
 }
 
@@ -43,9 +52,9 @@ void Addition()
 
     while (true)
     {
-        a = random.Next(100);
-        b = random.Next(100);
-        x = a + b;
+        int a = random.Next(100);
+        int b = random.Next(100);
+        int x = a + b;
 
         Console.WriteLine($"{a} + {b} = ");
 
@@ -75,22 +84,136 @@ void Addition()
     }
 }
 
+void Subtraction()
+{
+    Console.WriteLine($"Game started! Type 'Exit', if you want to end the game");
+
+    while (true)
+    {
+        int a = random.Next(100);
+        int b = random.Next(100);
+        int x = a - b;
+
+        Console.WriteLine($"{a} - {b} = ");
+
+        var userInput = Console.ReadLine();
+
+        if (userInput == "exit")
+        {
+            break;
+        }
+
+        int userAnswer;
+        bool success = int.TryParse(userInput, out userAnswer);
+
+        if (success != true)
+        {
+            Console.WriteLine($"Wrong input! Please, type integer value");
+        }
+
+        if (userAnswer == x)
+        {
+            Console.WriteLine($"{a} - {b} = {userAnswer} - Correct!");
+        }
+        else
+        {
+            Console.WriteLine($"{a} - {b} = {userAnswer} - Wrong!");
+        }
+    }
+}
+
+void Multiplication()
+{
+    Console.WriteLine($"Game started! Type 'Exit', if you want to end the game");
+
+    while (true)
+    {
+        int a = random.Next(100);
+        int b = random.Next(100);
+        int x = a * b;
+
+        Console.WriteLine($"{a} * {b} = ");
+
+        var userInput = Console.ReadLine();
+
+        if (userInput == "exit")
+        {
+            break;
+        }
+
+        int userAnswer;
+        bool success = int.TryParse(userInput, out userAnswer);
+
+        if (success != true)
+        {
+            Console.WriteLine($"Wrong input! Please, type integer value");
+        }
+
+        if (userAnswer == x)
+        {
+            Console.WriteLine($"{a} * {b} = {userAnswer} - Correct!");
+        }
+        else
+        {
+            Console.WriteLine($"{a} * {b} = {userAnswer} - Wrong!");
+        }
+    }
+}
+
 /*
-int Subtraction()
+void Division()
 {
+    Console.WriteLine($"Game started! Type 'Exit', if you want to end the game");
 
+    while (true)
+    {
+
+        int a = random.Next(1, 100);
+        int b = random.Next(1, 100);
+
+        while (true)
+        {
+
+            if (a % b == 0)
+            {
+                int x = a / b;
+                Console.WriteLine($"{a} / {b} = ");
+
+                var userInput = Console.ReadLine();
+
+                if (userInput == "exit")
+                {
+                    break;
+                }
+
+                int userAnswer;
+                bool success = int.TryParse(userInput, out userAnswer);
+
+                if (success != true)
+                {
+                    Console.WriteLine($"Wrong input! Please, type integer value");
+                }
+
+                if (userAnswer == x)
+                {
+                    Console.WriteLine($"{a} / {b} = {userAnswer} - Correct!");
+                }
+                else
+                {
+                    Console.WriteLine($"{a} / {b} = {userAnswer} - Wrong!");
+                }
+            }
+            else
+            {
+                break;
+            }
+
+        }
+    }
 }
+*/
 
-int Multiplication()
-{
-
-}
-
-int Division()
-{
-
-}
-
+/*
 string History()
 {
 
