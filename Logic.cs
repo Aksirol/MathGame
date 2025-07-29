@@ -125,6 +125,43 @@ namespace MathGame
         public static void Division()
         {
             Console.WriteLine($"Game started! Type 'Exit', if you want to end the game");
+
+            while (true)
+            {
+                do
+                {
+                    Numbers(out a, out b);
+
+                } while ((a % b != 0) || (b == 0));
+
+                x = a / b;
+
+                Console.WriteLine($"{a} / {b} = ");
+
+                var userInput = Console.ReadLine();
+
+                if (userInput == "exit")
+                {
+                    break;
+                }
+
+                int userAnswer;
+                bool success = int.TryParse(userInput, out userAnswer);
+
+                if (success != true)
+                {
+                    Console.WriteLine($"Wrong input! Please, type integer value");
+                }
+
+                if (userAnswer == x)
+                {
+                    Console.WriteLine($"{a} / {b} = {userAnswer} - Correct!");
+                }
+                else
+                {
+                    Console.WriteLine($"{a} / {b} = {userAnswer} - Wrong!");
+                }
+            }
         }
 
 
