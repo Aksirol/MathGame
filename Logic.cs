@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace MathGame
 {
     public class Logic
@@ -10,160 +5,11 @@ namespace MathGame
         private static int a;
         private static int b;
         private static int x;
-        public static void Addition()
-
-        {
-            Console.WriteLine($"Game started! Type 'Exit', if you want to end the game");
-
-            while (true)
-            {
-                Numbers(out a, out b);
-                x = a + b;
-
-                Console.WriteLine($"{a} + {b} = ");
-
-                var userInput = Console.ReadLine();
-
-                if (userInput == "exit")
-                {
-                    break;
-                }
-
-                int userAnswer;
-                bool success = int.TryParse(userInput, out userAnswer);
-
-                if (success != true)
-                {
-                    Console.WriteLine($"Wrong input! Please, type integer value");
-                }
-
-                if (userAnswer == x)
-                {
-                    Console.WriteLine($"{a} + {b} = {userAnswer} - Correct!");
-                }
-                else
-                {
-                    Console.WriteLine($"{a} + {b} = {userAnswer} - Wrong!");
-                }
-            }
-        }
-
-        public static void Subtraction()
-        {
-            Console.WriteLine($"Game started! Type 'Exit', if you want to end the game");
-
-            while (true)
-            {
-                Numbers(out a, out b);
-                x = a - b;
-
-                Console.WriteLine($"{a} - {b} = ");
-
-                var userInput = Console.ReadLine();
-
-                if (userInput == "exit")
-                {
-                    break;
-                }
-
-                int userAnswer;
-                bool success = int.TryParse(userInput, out userAnswer);
-
-                if (success != true)
-                {
-                    Console.WriteLine($"Wrong input! Please, type integer value");
-                }
-
-                if (userAnswer == x)
-                {
-                    Console.WriteLine($"{a} - {b} = {userAnswer} - Correct!");
-                }
-                else
-                {
-                    Console.WriteLine($"{a} - {b} = {userAnswer} - Wrong!");
-                }
-            }
-        }
-
-        public static void Multiplication()
-        {
-            Console.WriteLine($"Game started! Type 'Exit', if you want to end the game");
-
-            while (true)
-            {
-                Numbers(out a, out b);
-                x = a * b;
-
-                Console.WriteLine($"{a} * {b} = ");
-
-                var userInput = Console.ReadLine();
-
-                if (userInput == "exit")
-                {
-                    break;
-                }
-
-                int userAnswer;
-                bool success = int.TryParse(userInput, out userAnswer);
-
-                if (success != true)
-                {
-                    Console.WriteLine($"Wrong input! Please, type integer value");
-                }
-
-                if (userAnswer == x)
-                {
-                    Console.WriteLine($"{a} * {b} = {userAnswer} - Correct!");
-                }
-                else
-                {
-                    Console.WriteLine($"{a} * {b} = {userAnswer} - Wrong!");
-                }
-            }
-        }
-
-        public static void Division()
-        {
-            Console.WriteLine($"Game started! Type 'Exit', if you want to end the game");
-
-            while (true)
-            {
-                do
-                {
-                    Numbers(out a, out b);
-
-                } while ((a % b != 0) || (b == 0));
-
-                x = a / b;
-
-                Console.WriteLine($"{a} / {b} = ");
-
-                var userInput = Console.ReadLine();
-
-                if (userInput == "exit")
-                {
-                    break;
-                }
-
-                int userAnswer;
-                bool success = int.TryParse(userInput, out userAnswer);
-
-                if (success != true)
-                {
-                    Console.WriteLine($"Wrong input! Please, type integer value");
-                }
-
-                if (userAnswer == x)
-                {
-                    Console.WriteLine($"{a} / {b} = {userAnswer} - Correct!");
-                }
-                else
-                {
-                    Console.WriteLine($"{a} / {b} = {userAnswer} - Wrong!");
-                }
-            }
-        }
-
+        private static Random random = new Random();
+        public static void Addition() => PlayGame((a, b) => a + b, "+");
+        public static void Subtraction() => PlayGame((a, b) => a - b, "-");
+        public static void Multiplication() => PlayGame((a, b) => a * b, "*");
+        public static void Division() => PlayGame((a, b) => a / b, "/");
 
         /*
         string History()
@@ -172,9 +18,54 @@ namespace MathGame
         }
         */
 
+        public static void PlayGame(Func<int, int, int> operation, string operatorSymbol)
+        {
+            Console.WriteLine($"Game started! Type 'Exit', if you want to end the game");
+
+            while (true)
+            {
+                if (operatorSymbol == "/")
+                {
+                    do
+                    {
+                        Numbers(out a, out b);
+                    } while ((a % b != 0) || (b == 0));
+                }
+                else
+                {
+                    Numbers(out a, out b);
+                    x = operation(a, b);
+                }
+
+                Console.WriteLine($"{a} {operatorSymbol} {b} = ");
+
+                var userInput = Console.ReadLine();
+
+                if (userInput?.ToLower() == "exit")
+                {
+                    break;
+                }
+
+                if (int.TryParse(userInput, out int userAnswer))
+                {
+                    if (userAnswer == x)
+                    {
+                        Console.WriteLine($"{a} {operatorSymbol} {b} = {userAnswer} - Correct!");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{a} {operatorSymbol} {b} = {userAnswer} - Wrong!");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Wrong input! Please, type an integer value.");
+                }
+            }
+        }
+
         public static void Numbers(out int number1, out int number2)
         {
-            Random random = new Random();
             number1 = random.Next(1, 100);
             number2 = random.Next(1, 100);
         }
