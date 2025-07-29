@@ -9,15 +9,14 @@ namespace MathGame
     {
         public static void MenuInterface()
         {
-            int c = 0;
-
             Console.WriteLine($"Welcome to Math Game!");
 
-            foreach (string option in Enum.GetNames(typeof(MenuOptions)))
+            var options = Enum.GetNames(typeof(MenuOptions));
+            for (int i = 0; i < options.Length; i++)
             {
-                c++;
-                Console.WriteLine($"{c}. {option}");
+                Console.WriteLine($"{i + 1}. {options[i]}");
             }
+
 
             while (true)
             {
@@ -33,6 +32,7 @@ namespace MathGame
                 else if (result > 7 || result <= 0)
                 {
                     Console.WriteLine($"Please, enter number of menu options");
+                    continue;
                 }
 
                 switch (result)

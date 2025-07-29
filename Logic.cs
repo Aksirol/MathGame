@@ -2,14 +2,11 @@ namespace MathGame
 {
     public class Logic
     {
-        private static int a;
-        private static int b;
-        private static int x;
         private static Random random = new Random();
-        public static void Addition() => PlayGame((a, b) => a + b, "+");
-        public static void Subtraction() => PlayGame((a, b) => a - b, "-");
-        public static void Multiplication() => PlayGame((a, b) => a * b, "*");
-        public static void Division() => PlayGame((a, b) => a / b, "/");
+        public static void Addition() => PlayGame((a, b) => a + b, '+');
+        public static void Subtraction() => PlayGame((a, b) => a - b, '-');
+        public static void Multiplication() => PlayGame((a, b) => a * b, '*');
+        public static void Division() => PlayGame((a, b) => a / b, '/');
 
         /*
         string History()
@@ -18,18 +15,23 @@ namespace MathGame
         }
         */
 
-        public static void PlayGame(Func<int, int, int> operation, string operatorSymbol)
+        public static void PlayGame(Func<int, int, int> operation, char operatorSymbol)
         {
+            int a, b, x;
+
             Console.WriteLine($"Game started! Type 'Exit', if you want to end the game");
 
             while (true)
             {
-                if (operatorSymbol == "/")
+                if (operatorSymbol == '/')
                 {
                     do
                     {
                         Numbers(out a, out b);
                     } while ((a % b != 0) || (b == 0));
+
+                    x = operation(a, b);
+
                 }
                 else
                 {
